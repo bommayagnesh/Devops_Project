@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>DevOps Automation Demo 🚀</h1>
+
+    <p>Click the button to simulate deployment process</p>
+
+    <button onclick="deploy()">Run Deployment</button>
+
+    <div id="output"></div>
+
+    <script>
+        function deploy() {
+            let output = document.getElementById("output");
+
+            output.innerHTML = "🔄 Starting Build...";
+
+            setTimeout(() => {
+                output.innerHTML = "⚙️ Running Tests...";
+            }, 2000);
+
+            setTimeout(() => {
+                output.innerHTML = "🚀 Deploying Application...";
+            }, 4000);
+
+            setTimeout(() => {
+                output.innerHTML = "✅ Deployment Successful!";
+            }, 6000);
+        }
+    </script>
+
+</body>
+</html>
