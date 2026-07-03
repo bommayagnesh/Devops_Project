@@ -1,64 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DevOps Demo</title>
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #2c3e50;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        #output {
-            margin-top: 20px;
-            font-size: 18px;
-            color: green;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps CI/CD Pipeline Demo</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background:#eef2f7;
+        text-align:center;
+        margin:0;
+        padding:30px;
+    }
+
+    h1{
+        color:#2c3e50;
+    }
+
+    p{
+        color:#555;
+    }
+
+    button{
+        padding:12px 25px;
+        background:#0078d4;
+        color:white;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+        font-size:16px;
+    }
+
+    button:hover{
+        background:#005fa3;
+    }
+
+    .pipeline{
+        width:500px;
+        margin:30px auto;
+        text-align:left;
+        background:white;
+        padding:20px;
+        border-radius:10px;
+        box-shadow:0px 0px 10px rgba(0,0,0,.2);
+    }
+
+    .step{
+        padding:12px;
+        margin:8px 0;
+        border-left:5px solid gray;
+        background:#f8f9fa;
+        font-weight:bold;
+    }
+
+    .running{
+        border-left-color:orange;
+        background:#fff3cd;
+    }
+
+    .success{
+        border-left-color:green;
+        background:#d4edda;
+    }
+
+    #final{
+        margin-top:20px;
+        font-size:22px;
+        color:green;
+        font-weight:bold;
+    }
+</style>
+
 </head>
 
 <body>
 
-    <h1>DevOps Automation Demo 🚀</h1>
+<h1>🚀 DevOps CI/CD Pipeline Demo</h1>
 
-    <p>Click the button to simulate deployment process</p>
+<p>Click the button to simulate the DevOps deployment process.</p>
 
-    <button onclick="deploy()">Run Deployment</button>
+<button onclick="startPipeline()">Start Pipeline</button>
 
-    <div id="output"></div>
+<div class="pipeline">
 
-    <script>
-        function deploy() {
-            let output = document.getElementById("output");
+<div class="step" id="plan">📋 Planning</div>
+<div class="step" id="code">💻 Coding</div>
+<div class="step" id="build">🔨 Build</div>
+<div class="step" id="test">🧪 Testing</div>
+<div class="step" id="deploy">🚀 Deployment</div>
+<div class="step" id="monitor">📊 Monitoring</div>
 
-            output.innerHTML = "🔄 Starting Build...";
+</div>
 
-            setTimeout(() => {
-                output.innerHTML = "⚙️ Running Tests...";
-            }, 2000);
+<div id="final"></div>
 
-            setTimeout(() => {
-                output.innerHTML = "🚀 Deploying Application...";
-            }, 4000);
+<script>
 
-            setTimeout(() => {
-                output.innerHTML = "✅ Deployment Successful!";
-            }, 6000);
-        }
-    </script>
+function complete(id){
+    document.getElementById(id).className="step success";
+}
+
+function running(id){
+    document.getElementById(id).className="step running";
+}
+
+function startPipeline(){
+
+    document.getElementById("final").innerHTML="";
+
+    let steps=["plan","code","build","test","deploy","monitor"];
+
+    steps.forEach(step=>{
+        document.getElementById(step).className="step";
+    });
+
+    running("plan");
+
+    setTimeout(()=>{
+        complete("plan");
+        running("code");
+    },1000);
+
+    setTimeout(()=>{
+        complete("code");
+        running("build");
+    },2500);
+
+    setTimeout(()=>{
+        complete("build");
+        running("test");
+    },4000);
+
+    setTimeout(()=>{
+        complete("test");
+        running("deploy");
+    },5500);
+
+    setTimeout(()=>{
+        complete("deploy");
+        running("monitor");
+    },7000);
+
+    setTimeout(()=>{
+        complete("monitor");
+        document.getElementById("final").innerHTML="✅ CI/CD Pipeline Completed Successfully!";
+    },8500);
+
+}
+
+</script>
 
 </body>
 </html>
